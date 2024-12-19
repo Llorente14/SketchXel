@@ -81,6 +81,7 @@ function handleHover(e) {
 const eraserBtn = document.querySelector(".eraser");
 
 eraserBtn.addEventListener("click", () => {
+  resetRandomState();
   warna = backgroundWarna;
 });
 
@@ -89,6 +90,7 @@ const warnaBtn = document.querySelectorAll(".color");
 
 warnaBtn.forEach((btn) => {
   btn.addEventListener("click", (e) => {
+    resetRandomState();
     warna = window.getComputedStyle(e.target).backgroundColor;
   });
 });
@@ -152,4 +154,13 @@ randomBtn.addEventListener("click", () => {
     });
   }
 });
+
+//Buat Hapus Efek Random ketika menekan tombol lain
+function resetRandomState() {
+  isRandom = false;
+  const boxes = document.querySelectorAll(".box");
+  boxes.forEach((box) => {
+    box.removeEventListener("mouseover", handleRandom);
+  });
+}
 generateGrid();
